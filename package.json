@@ -1,0 +1,30 @@
+{
+    "name": "popup-hackathon",
+    "version": "1.0.0",
+    "main": "index.js",
+    "author": "Connor McCafferty <connor.mccafferty@openfin.co",
+    "workspaces": {
+      "packages": [
+        "client-library",
+        "demo",
+        "server"
+      ],
+      "nohoist": [
+        "**/gts",
+        "**/eslint"
+      ]
+    },
+    "scripts": {
+      "build": "yarn workspace popup-client compile && yarn workspace popup-demo build",
+      "dev": "concurrently yarn:dev:demo yarn:dev:lib",
+      "dev:lib": "yarn workspace popup-client watch",
+      "dev:demo": "yarn workspace popup-demo dev",
+      "start": "yarn build && yarn launch",
+      "launch": "yarn workspace dev-server start"
+    },
+    "private": true,
+    "license": "MIT",
+    "dependencies": {
+      "concurrently": "^6.0.1"
+    }
+  }

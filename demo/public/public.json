@@ -1,0 +1,60 @@
+{
+    "runtime": {
+        "arguments": "--electron-child-windows --inspect --v=1 --relax-api-security",
+        "version": "canary"
+    },
+    "platform": {
+        "uuid": "popup_demo",
+        "applicationIcon": "https://openfin.github.io/golden-prototype/favicon.ico",
+        "providerUrl": "http://localhost:3000/provider",
+        "autoShow": true,
+        "defaultWindowOptions": {
+            "url": "http://localhost:3000/platform-window",
+            "waitForPageLoad": true,
+            "contextMenu": true,
+            "defaultWidth": 600,
+            "defaultHeight": 600,
+            "backgroundColor": "#111118",
+            "defaultLeft": 0,
+            "defaultTop": 0,
+            "saveWindowState": false,
+            "showBackgroundImages": true,
+            "backgroundThrottling": true,
+            "minHeight": 445,
+            "minWidth": 354,
+            "autoshow": true
+        },
+        "defaultViewOptions": {
+            "backgroundColor": "#111118"
+        },
+        "commands": [
+            {
+                "command": "stack.nextTab",
+                "keys": "Ctrl+Tab"
+            }
+        ]
+    },
+    "snapshot": {
+        "windows": [
+            {
+                "layout": {
+                    "content": [
+                        {
+                            "type": "stack",
+                            "content": [
+                                {
+                                    "type": "component",
+                                    "componentName": "view",
+                                    "componentState": {
+                                        "processAffinity": "ps_1",
+                                        "url": "http://localhost:3000"
+                                    }
+                                }
+                            ]
+                        }
+                    ]
+                }
+            }
+        ]
+    }
+}
