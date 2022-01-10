@@ -6,8 +6,7 @@
     "workspaces": {
       "packages": [
         "client-library",
-        "demo",
-        "server"
+        "demo"
       ],
       "nohoist": [
         "**/gts",
@@ -19,8 +18,7 @@
       "dev": "concurrently yarn:dev:demo yarn:dev:lib",
       "dev:lib": "yarn workspace popup-client watch",
       "dev:demo": "yarn workspace popup-demo dev",
-      "start": "yarn build && yarn launch",
-      "launch": "yarn workspace dev-server start"
+      "launch": "npx openfin-cli -l -c http://localhost:3000/app.json"
     },
     "private": true,
     "license": "MIT",
