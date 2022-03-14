@@ -11,6 +11,25 @@ export default function PlatformWindow() {
         fin.Platform.Layout.init();
     }, []); // Data ensures this only runs once
 
+    // setup popup windows
+    useEffect(() => {
+        (async () => {
+            await fin.Window.create({
+                frame: false,
+                name: `popup-${fin.me.name}`,
+                url: `${location.origin}/popup`,
+                autoShow: false
+            });
+            
+            await fin.Window.create({
+                frame: false,
+                name: `color-picker-${fin.me.name}`,
+                url: `${location.origin}/color-picker`,
+                autoShow: false
+            });
+        })();
+    }, [])
+
     const [contentToShow, setContent] = useState('layout');
     const hideForm = () => setContent('layout')
 

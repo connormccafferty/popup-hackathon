@@ -1,8 +1,8 @@
+import { fin } from 'openfin-adapter/src/mock';
 import React from 'react';
-import { Popup } from 'popup-client';
 
 const handleclick = async (e) => {
-    await Popup.trigger(e.target.id, e.target.innerHTML);
+    await (fin.me as any).dispatchPopupResult(e.target.innerHTML);
 }
 
 export default function PopupWindow() {

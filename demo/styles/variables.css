@@ -260,7 +260,7 @@ fieldset label {
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    background-color: var(--main-background-color);
+    background-color: var(--of-default-red-negative);
     color: #eee;
 }
 
@@ -294,4 +294,12 @@ fieldset label {
 	padding: 0;
 	font: inherit;
 	outline: inherit;
+}
+
+#color-picker {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    height: 50px;
+    width: 300px;
 }

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import useTheme from '../hooks/theme';
 import { fin } from 'openfin-adapter/src/mock';
-import { Popup } from 'popup-client';
+// import { Popup } from 'popup-client';
 
 const maxOrRestore = async () => {
     if (!fin.me.isWindow) {
@@ -48,6 +48,7 @@ const minimize = () => fin.me.isWindow &&  fin.me.minimize();
 
 export default function TitleBar({ toggleMenu }) {
     const [popupResult, setPopupResult] = useState('🔽');
+    const [activeColor, setActiveColor] = useState('gray');
 
     useEffect(() => {
         // fin.Platform.getCurrentSync().getWindowContext().then(initialContext => {
@@ -81,19 +82,45 @@ export default function TitleBar({ toggleMenu }) {
     
     const { toggleTheme } = useTheme();
 
-    const toggleDropDown = async (e) => {
+    const toggleColorPickerMenu = async (e) => {
+        const { width, height } = await (fin.me as OpenFin.Window).getBounds();
+        const x = Math.round(width / 2) - 150;
+        const y = Math.round(height / 2) - 50;
         const opts = {
-            url: `${location.origin}/popup`,
+            name: `color-picker-${fin.me.name}`,
+            width: 300,
+            height: 50,
+            x,
+            y,
+            hideOnClose: true,
+            resultDispatchBehavior: 'none',
+            onPopupResult: async (result) => {
+                if (result.data) {
+                    setActiveColor(result.data.color);
+                    // await (fin.me as any).interop.joinContextGroup(result.data.name);
+                }
+            }
+        }
+        await (fin.me as any).showPopupWindow(opts);
+    }
+
+    const toggleDropDown = async (e) => {
+        const { left, bottom, width } = e.target.getBoundingClientRect();
+        const x = (left + Math.round(width / 2)) - 150;
+        const y = bottom + 3;
+        const opts = {
+            name: `popup-${fin.me.name}`,
+            width: 300,
             height: 142,
-            width: 250,
-            targetElement: e.target
+            x, 
+            y,
+            hideOnClose: true
         }
 
-        const result = await Popup.show(opts);
-        console.log(result);
+        const result = await (fin.me as any).showPopupWindow(opts);
         
-        if ((result as any).data) {
-            setPopupResult((result as OpenFin.ClickedMenuResult).data.data);
+        if (result.data) {
+            setPopupResult(result.data);
         } else {
             setPopupResult('🔽');
         }
@@ -104,6 +131,18 @@ export default function TitleBar({ toggleMenu }) {
             <div id="title"></div>
         </div>
         <div id="buttons-wrapper">
+            <div className="button" title="Color Picker" id="color-picker-button" onClick={toggleColorPickerMenu} style={{
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center'
+            }}>
+                <div style={{ 
+                    borderRadius: '50%',
+                    background: activeColor,
+                    height: '60%',
+                    width: '60%'
+                }}></div>
+            </div>
             <div className="button" title="Popup Menu" id="popup-button" onClick={toggleDropDown}>{popupResult}</div>
             <div className="button" title="Toggle Theme" id="theme-button" onClick={toggleTheme}></div>
             <div className="button" title="Toggle Sidebar" id="menu-button" onClick={toggleMenu}></div >

@@ -18,7 +18,6 @@
             "defaultLeft": 0,
             "defaultTop": 0,
             "saveWindowState": false,
-            "showBackgroundImages": true,
             "backgroundThrottling": true,
             "minHeight": 445,
             "minWidth": 354,
@@ -32,7 +31,53 @@
                 "command": "stack.nextTab",
                 "keys": "Ctrl+Tab"
             }
-        ]
+        ],
+        "interopBrokerConfiguration": {
+            "contextGroups": [
+            {
+            "id": "green",
+            "displayMetadata": {
+            "color": "#00CC88",
+            "name": "green"
+            }
+            },
+            {
+            "id": "purple",
+            "displayMetadata": {
+            "color": "#8C61FF",
+            "name": "purple"
+            }
+            },
+            {
+            "id": "orange",
+            "displayMetadata": {
+            "color": "#FF8C4C",
+            "name": "orange"
+            }
+            },
+            {
+            "id": "red",
+            "displayMetadata": {
+            "color": "#FF5E60",
+            "name": "red"
+            }
+            },
+            {
+            "id": "pink",
+            "displayMetadata": {
+            "color": "#FF8FB8",
+            "name": "pink"
+            }
+            },
+            {
+            "id": "yellow",
+            "displayMetadata": {
+            "color": "#E9FF8F",
+            "name": "yellow"
+            }
+            }
+            ]
+            }
     },
     "snapshot": {
         "windows": [
